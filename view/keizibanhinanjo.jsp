@@ -1,8 +1,52 @@
 <!DOCTYPE html>
+
+<%@ page import="java.sql.*, keiziban.action.MyDBAccess"
+contentType="text/html; charset=utf-8" %>
+
+<%
+// MyDBAccess のインスタンスを生成する
+MyDBAccess db = new MyDBAccess();
+
+// データベースへのアクセス
+db.open();
+
+ResultSet rs = db.getResultSet("select * from hinan");
+
+while(rs.next()) {
+
+    int syukey = rs.getInt("syukey"); // メンバーIDを取得
+    String adress = rs.getString("adress"); // メンバー名を取得
+    String name = rs.getString("name"); // メンバー名(カナ)を取得
+    String tel = rs.getString("tel"); // メンバーIDを取得
+    String mail = rs.getString("mail"); // メンバー名を取得
+    String jokyo = rs.getString("jokyo"); // メンバー名(カナ)を取得
+    String bussi = rs.getString("bussi"); // メンバーIDを取得
+    String bikou = rs.getString("bikou"); // メンバー名を取得
+    String pass = rs.getString("pass"); // メンバー名(カナ)を取得
+    String pic1= rs.getString("pic1"); // メンバーIDを取得
+    String pic2 = rs.getString("pic2"); // メンバー名を取得
+    String pic3 = rs.getString("pic3"); // メンバー名(カナ)を取得
+    String pic4 = rs.getString("pic4"); // メンバーIDを取得
+    String kosin = rs.getString("kosin"); // メンバー名を取得
+    String syonin = rs.getString("syonin"); // メンバー名(カナ)を取得
+
+
+    // 文字コードを EUC_JP からUnicode へ変換
+    adress = new String(adress.getBytes("8859_1"), "EUC_JP");
+    name = new String(name.getBytes("8859_1"), "EUC_JP");
+    tel = new String(tel.getBytes("8859_1"), "EUC_JP");
+    mail = new String(mail.getBytes("8859_1"), "EUC_JP");
+    jokyo = new String(jokyo.getBytes("8859_1"), "EUC_JP");
+    bussi = new String(bussi.getBytes("8859_1"), "EUC_JP");
+    bikou = new String(bikou.getBytes("8859_1"), "EUC_JP");
+    pass = new String(pass.getBytes("8859_1"), "EUC_JP");
+    kosin = new String(pic1.getBytes("8859_1"), "EUC_JP");
+    syonin = new String(syonin.getBytes("8859_1"), "EUC_JP");
+}
+%>
+
+<%db.close(); %>
 <html>
-<%@ page contentType="text/html; charset=utf-8" %>
-
-
 <head>
 
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
@@ -30,7 +74,7 @@
 住所:
 </td>
 <td style="width: 300px">
-</td>
+<%=rs.getString("adress")%></td>
 </tr>
 
 <tr>
@@ -157,6 +201,8 @@
 
 </div>
 </div>
+
+
 
 <div id="footer">
 </div>

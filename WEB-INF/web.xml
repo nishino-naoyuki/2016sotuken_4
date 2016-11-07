@@ -44,4 +44,25 @@
 	<url-pattern>/keizibanhinanjo</url-pattern>
 </servlet-mapping>
 
+<servlet>
+	<servlet-name>CommentPassword</servlet-name>
+	<servlet-class>keiziban.action.CommentPassword</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>CommentPassword</servlet-name>
+	<url-pattern>/commentpassword</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+	<servlet-name>Find</servlet-name>
+	<servlet-class>keiziban.action.Find</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>Find</servlet-name>
+	<url-pattern>/find</url-pattern>
+</servlet-mapping>
+
 </web-app>
