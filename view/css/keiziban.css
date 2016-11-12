@@ -17,23 +17,35 @@
 	margin:auto;
 	height:100%;
 }
-
-.info {
+.joho{
+	width:80%;
 	margin:auto;
-	width:65%;
-	height:400px;
 }
 
+.info {
+	margin:auto 80px 30px;;
+	width:500px;
+	height:400px;
+	float:left;
+}
+
+.img{
+	margin:auto 10px;
+	width:400px;
+	height:400px;
+	float:left;
+}
 .comment{
 	width:80%;
 	height:270px;
 	margin:auto;
+	clear:both;
 }
 
 .comment1{
 	width:80%;
 	height:300px;
-	margin:auto;
+	margin:40px auto;
 }
 
 
@@ -99,7 +111,8 @@ div#footer{
 }
 
 table.touroku{
-	margin:20px auto;
+	margin:50px auto;
+	width:900px;
 }
 
 table.touroku td, th {
@@ -114,7 +127,7 @@ table.info{
 }
 
 table.info td{
-	padding: 1px;
+
 	width: 100px;
 	height: 40px;
 	text-align:left;
@@ -122,24 +135,30 @@ table.info td{
 }
 
 img{
-	margin:30px;
+	margin:10px auto;
 }
 
 .button {
-	width:100%;
+	width:1350px;
 	height:100px;
 	text-align:center;
+	margin:auto;
 }
 
 table.chat td {
 	border: 1px solid black;
 	border-collapse: collapse;
-	padding: 3px;
+	padding: 1px;
 	width: 30px;
 	height: 40px;
 
 }
 table.chat{
-	width:80%;
-	margin:20px auto;
+	width:800px;
+	margin:auto;
+	overflow-y:auto;
+	height:30px;
+}
+a.delete{
+	font-color:red;
 }

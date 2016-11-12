@@ -65,4 +65,26 @@
 	<url-pattern>/find</url-pattern>
 </servlet-mapping>
 
+<servlet>
+	<servlet-name>InsertComment</servlet-name>
+	<servlet-class>keiziban.action.InsertComment</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>InsertComment</servlet-name>
+	<url-pattern>/insertcomment</url-pattern>
+</servlet-mapping>
+
+<servlet>
+	<servlet-name>KeizibanHinanjoBo</servlet-name>
+	<servlet-class>keiziban.action.KeizibanHinanjoBo</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>KeizibanHinanjoBo</servlet-name>
+	<url-pattern>/keizibanhinajobo</url-pattern>
+</servlet-mapping>
+
+
+
 </web-app>

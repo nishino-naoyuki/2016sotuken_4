@@ -12,10 +12,9 @@ db.open();
 
 ResultSet rs = db.getResultSet("select * from hinan");
 
-while(rs.next()) {
 
-    int syukey = rs.getInt("syukey"); // メンバーIDを取得
-    String adress = rs.getString("adress"); // メンバー名を取得
+while(rs.next()) {
+	String adress = rs.getString("adress"); // メンバー名を取得
     String name = rs.getString("name"); // メンバー名(カナ)を取得
     String tel = rs.getString("tel"); // メンバーIDを取得
     String mail = rs.getString("mail"); // メンバー名を取得
@@ -29,23 +28,9 @@ while(rs.next()) {
     String pic4 = rs.getString("pic4"); // メンバーIDを取得
     String kosin = rs.getString("kosin"); // メンバー名を取得
     String syonin = rs.getString("syonin"); // メンバー名(カナ)を取得
-
-
-    // 文字コードを EUC_JP からUnicode へ変換
-    adress = new String(adress.getBytes("8859_1"), "EUC_JP");
-    name = new String(name.getBytes("8859_1"), "EUC_JP");
-    tel = new String(tel.getBytes("8859_1"), "EUC_JP");
-    mail = new String(mail.getBytes("8859_1"), "EUC_JP");
-    jokyo = new String(jokyo.getBytes("8859_1"), "EUC_JP");
-    bussi = new String(bussi.getBytes("8859_1"), "EUC_JP");
-    bikou = new String(bikou.getBytes("8859_1"), "EUC_JP");
-    pass = new String(pass.getBytes("8859_1"), "EUC_JP");
-    kosin = new String(pic1.getBytes("8859_1"), "EUC_JP");
-    syonin = new String(syonin.getBytes("8859_1"), "EUC_JP");
-}
 %>
 
-<%db.close(); %>
+
 <html>
 <head>
 
@@ -67,95 +52,115 @@ while(rs.next()) {
 </div>
 
 <div class="main">
+<div class="joho">
 <div class="info">
-<table class="info"  align="left" style="width: 499px" >
+
+<table class="info" style="width: 499px" >
 <tr>
-<td style="width: 121px">
+<td style="width: 115px">
 住所:
 </td>
 <td style="width: 300px">
-<%=rs.getString("adress")%></td>
+<%out.print(adress);%></td>
 </tr>
 
 <tr>
-<td style="width: 121px" >
+<td style="width: 115px" >
 代表者名:
 </td>
 <td style="width: 300px">
-</td>
+<%out.print(name);%></td>
 </tr>
 
 <tr>
-<td style="width: 121px" >
+<td style="width: 115px" >
 代表者TEL:
 </td>
 <td style="width: 300px">
-</td>
+<%out.print(tel);%></td>
 </tr>
 
 <tr>
-<td style="width: 121px" >
+<td style="width: 115px" >
 避難所状況:
 </td>
 <td style="width: 300px">
-</td>
+<%out.print(jokyo);%></td>
 </tr>
 
 <tr>
-<td style="width: 121px" >
+<td style="width: 115px" >
 必要な物資:
 </td>
 <td style="width: 300px">
-</td>
+<%out.print(bussi);%></td>
 </tr>
 
 <tr>
-<td style="width: 121px" >
+<td style="width: 115px" >
 備考:
 </td>
 <td style="width: 300px">
-</td>
+<%out.print(bikou);%></td>
 </tr>
 
 <tr>
-<td style="width: 121px" >
+<td style="width: 115px" >
 更新日:
 </td>
 <td style="width: 300px">
-</td>
+<%out.print(kosin);%></td>
 </tr>
 </table>
-
-<img alt="避難所" height="307" src="view/img/hinanjo_photo.jpg" width="316" class="auto-style1"/>
 </div>
 
+<div class="img">
+<img alt="避難所" height="307" src="view/img/hinanjo_photo.jpg" width="316" >
+</div>
+</div>
+<%} %>
 
-<div class="comment">
+<%
+
+
+
+ResultSet ts = db.getResultSet("select * from hinan_cm where syukey = 1");
+
+while(ts.next()){
+		String syukey= ts.getString("syukey"); // メンバーIDを取得
+	    String num = ts.getString("cm_num"); // メンバー名を取得
+	    String name_cm = ts.getString("name"); // メンバー名(カナ)を取得
+	    String kosin_cm = ts.getString("kosin"); // メンバーIDを取得
+	    String pass_cm = ts.getString("pass"); // メンバー名を取得
+	    String cm = ts.getString("cm"); // メンバー名(カナ)を取得
+%>
+
 <table class="chat" align="center">
 	<tbody>
+
 		<tr>
-			<td></td>
+			<td><%out.print(num);%>、<%out.print(name_cm);%><br/>
+			&nbsp;&nbsp;<%out.print(cm);%>
+			<div class="kosin" align="right"><%out.print(kosin_cm);%>&nbsp;&nbsp;<a href="delete">削除</a></div></td>
 		</tr>
-		<tr>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-		</tr>
+
 	</tbody>
 </table>
-</div>
+<%} %>
 
 
+<form action="<%=request.getContextPath()%>/insertcomment" method="GET">
 
-<div class="coment1">
-<form action="" method="POST">
+<% ResultSet es = db.getResultSet("select syukey,cm_num from hinan_cm where cm_num = (select max(cm_num) from hinan_cm where syukey = 1)");
+while(es.next()){
+	   int num = es.getInt("cm_num");
+	   int number = num + 1;%>
+
+<input type="hidden" name="syukey" value="<%=es.getString("syukey")%>">
+<input type="hidden" name="cm_num" value="<%=number%>">
+
+<%} %>
+
 <table class="touroku">
 
 <tr>
@@ -192,6 +197,8 @@ while(rs.next()) {
 </table>
 </form>
 
+
+<%db.close(); %>
 <div class="button" >
 <button>戻る</button>
 <button>Twitter</button>
@@ -200,7 +207,7 @@ while(rs.next()) {
 </div>
 
 </div>
-</div>
+
 
 
 
